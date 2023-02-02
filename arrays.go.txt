@@ -1,0 +1,19 @@
+package main
+
+import "fmt"
+
+func main() {
+	cardRanks := [13]string{" 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", "10", " J", " Q", " K", " A"}
+	var cardSuits = [4]rune{'♣', '♠', '♥', '♦'} // Long syntax local scope
+	fmt.Println(cardSuits, cardRanks)
+
+	for s, card := range cardSuits {
+		fmt.Printf("Card Suit %d: %c %U\n", s, card, card)
+	}
+	for r, cardr := range cardRanks {
+		for s, cards := range cardSuits {
+			fmt.Printf("Card %2d: %s%c, ", 1+r+s*13, cardr, cards)
+		}
+		fmt.Println()
+	}
+}

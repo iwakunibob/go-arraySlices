@@ -1,0 +1,42 @@
+package main
+
+import "fmt"
+
+type user struct {
+	firstName string
+	lastName  string
+	age       int
+	contactInfo
+}
+
+type contactInfo struct {
+	email   string
+	zipcode int
+}
+
+func main() {
+	// Prefered method for avoid position dependency
+	teacher := user{firstName: "Robert", lastName: "Laurie", age: 65}
+	fmt.Println(teacher)
+	student1 := user{"Trevor", "Sawler", 25, contactInfo{"trevor@gmail.com", 94567}} // short position dependent
+	fmt.Println(student1)
+	var student2 user // Declared but not initialized "" "" 0
+	fmt.Printf("Student2: %+v \n", student2)
+	student3 := user{
+		firstName: "Alex",
+		lastName:  "Novotny",
+		age:       28,
+		contactInfo: contactInfo{
+			email:   "alex@gmail.com",
+			zipcode: 34567,
+		},
+	}
+	fmt.Printf("Student3: %+v \n", student3)
+	teacher.print()
+	student3.print()
+}
+
+func (u user) print() {
+	fmt.Printf("User %s, %s: Age=%d Email=%s Zipcode=%d\n", u.lastName,
+		u.firstName, u.age, u.email, u.zipcode)
+}
